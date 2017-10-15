@@ -1,6 +1,5 @@
-const Render = function(elements, tracker) {
-  this.tracker = () => {
-    const component = new TrackerComponent(tracker)
-    elements.main.append(component.render())
-  }
+const Render = function(tracker) {
+  const component = new TrackerComponent(tracker)
+  
+  Elements().main.append(component.render())
 }

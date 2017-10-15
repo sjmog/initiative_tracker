@@ -12,7 +12,6 @@
 //= require ./components/property
 
 //= require ./elements
-//= require ./controller
 //= require ./render
 
 let tracker = new Tracker
@@ -20,5 +19,4 @@ let tracker = new Tracker
 tracker.add("Kobold", 12, 7)
 tracker.add("Jef", 17, 21)
 
-const render = new Render(new Elements, tracker)
-render.tracker()
+Render(tracker)

@@ -1,3 +1,5 @@
 const Elements = function() {
-  this.main = $('#main')
+  return {
+    main: $('#main')
+  }
 }
