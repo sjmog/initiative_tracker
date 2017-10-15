@@ -6,17 +6,19 @@
 //= require bootstrap-sprockets
 //= require ./agent
 //= require ./tracker
+//= require ./components/components
+//= require ./components/tracker
+//= require ./components/agent
+//= require ./components/property
+
 //= require ./elements
+//= require ./controller
 //= require ./render
 
-let kobold = new Agent("Kobold", 12, 7)
-let jef = new Agent("Jef", 17, 21)
 let tracker = new Tracker
 
-tracker.add(kobold)
-tracker.add(jef)
+tracker.add("Kobold", 12, 7)
+tracker.add("Jef", 17, 21)
 
-const elements = new Elements
-const render = new Render(elements, tracker)
-
+const render = new Render(new Elements, tracker)
 render.tracker()
