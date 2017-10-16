@@ -1,14 +1,13 @@
 const AgentComponent = function(parent, agent, classes = []) {
   this.render = () => {
-      return `
-      <tr class="agent ${this._classes()}">
-        ${this._child(agent, 'name')}
-        ${this._child(agent, 'initiative')}
-        ${this._child(agent, 'ac')}
-        ${this._child(agent, 'hp')}
-        ${this._child(agent, 'status')}
-      </tr>
-    `
+    let el = document.createElement('tr')
+    el.className = `agent ${this._classes()}`
+
+    agent.PROPERTIES.forEach((property) => {
+      el.appendChild(this._child(agent, property))
+    })
+
+    return el
   }
 
   this._child = (agent, property) => {

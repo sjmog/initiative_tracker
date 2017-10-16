@@ -1,20 +1,16 @@
 const PropertyComponent = function(parent, agent, property) {
-  this.id = App.register(this)
-
   this.render = () => {
-    return `
-    <td 
-      class="property"
-      onBlur="App.find(${this.id}).change(this)"
-      onFocus="$(this).text('')" 
-      data-attr="${property}" 
-      data-id="${agent.id}" 
-      contenteditable>${agent[property]}
-    </td>
-    `
+    let el = document.createElement("td")
+    el.className = "property"
+    el.onblur = () => { this.change(el.textContent) }
+    el.onfocus = () => { el.textContent = '' }
+    el.contentEditable = true
+    el.appendChild(document.createTextNode(agent[property]))
+
+    return el
   }
 
-  this.change = (el) => {
-    parent.change(property, $(el).text())
+  this.change = (value) => {
+    parent.change(property, value)
   }
 }

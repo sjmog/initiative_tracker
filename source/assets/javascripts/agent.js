@@ -1,4 +1,6 @@
 const Agent = function(id, name, ac, hp, status) {
+  this.PROPERTIES = ['name', 'initiative', 'ac', 'hp', 'status']
+
   this.id     = id
   this.name   = name || "New Creature"
   this.initiative = Math.round(Math.random()*20)

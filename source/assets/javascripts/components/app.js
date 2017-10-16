@@ -1,36 +1,29 @@
 const AppComponent = function(rootElement, tracker) {
-  this.serial = 1
-  this.components = []
-
-  this.register = (component) => {
-    const id = this.serial++
-
-    this.components.push({
-      id: id,
-      component: component
-    })
-
-    return id
-  }
-
-  this.find = (id) => {
-    const record = this.components.filter((component) => component.id == parseInt(id))[0]
-    return record.component
-  }
+  const HEADERS = ['Name', 'Initiative', 'AC', 'Health', 'Status']
 
   this.render = () => {
-    rootElement.html(`
-      <table class="table">
-        <thead>
-          <td>Name</td>
-          <td>Initiative</td>
-          <td>AC</td>
-          <td>Health</td>
-          <td>Status</td>
-        </thead>
-        ${this._children()}
-      </table>
-    `)
+    let previous = document.getElementById('app')
+
+    let el = document.createElement('table')
+    el.id = 'app'
+    el.className = 'table'
+
+    let headers = document.createElement('thead')
+
+    HEADERS.forEach((header) => {
+      let headerElement = document.createElement('td')
+      let text = document.createTextNode(header)
+      headerElement.appendChild(text)
+      headers.appendChild(headerElement)
+    })
+
+    el.appendChild(headers)
+    el.appendChild(this._children())
+
+    if (previous)
+      rootElement.replaceChild(el, previous)
+    else
+      rootElement.appendChild(el)
   }
 
   this._children = () => {

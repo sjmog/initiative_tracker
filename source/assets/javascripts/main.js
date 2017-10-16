@@ -13,6 +13,6 @@
 //= require ./components/property
 
 //= require ./elements
-
-const App = new AppComponent(Elements.main, new Tracker)
+var tracker = new Tracker
+const App = new AppComponent(Elements.main, tracker)
 App.render()

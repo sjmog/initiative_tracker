@@ -1,11 +1,12 @@
 const TrackerComponent = function(parent, tracker) {
   this.render = () => {
-    return `
-      <tbody>
-        ${this._agents()}
-        ${this._newAgent()}
-      </tbody>
-    `
+    let el = document.createElement('tbody')
+    this._agents().forEach((agent) => {
+      el.appendChild(agent)
+    })
+    el.appendChild(this._newAgent())
+    
+    return el
   }
 
   this._agents = () => {
