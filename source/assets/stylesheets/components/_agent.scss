@@ -1,0 +1,23 @@
+.agent {
+
+}
+
+.agent--new {
+  color: $gray-lighter;
+}
+
+.agent--killed {
+  color: $gray-lighter;
+  font-style: italic;
+  position: relative;
+  &:after {
+    content: "";
+    display: block;
+    height: 1px;
+    background-color: $gray-lighter;
+    position: absolute;
+    right: 20px;
+    left: 20px;
+    margin-top: 25px;
+  }
+}

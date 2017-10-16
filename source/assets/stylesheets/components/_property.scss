@@ -1,0 +1,6 @@
+.property {
+  &:focus {
+    outline: none;
+    color: $gray-dark;
+  }
+}

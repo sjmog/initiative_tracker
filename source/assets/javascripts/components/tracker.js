@@ -16,7 +16,7 @@ const TrackerComponent = function(parent, tracker) {
   }
 
   this._newAgent = () => {
-    const component = new AgentComponent(this, new Agent)
+    const component = new AgentComponent(this, new Agent, "agent--new")
     return component.render()
   }
 

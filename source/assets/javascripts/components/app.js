@@ -17,10 +17,10 @@ const AppComponent = function(rootElement, tracker) {
     const record = this.components.filter((component) => component.id == parseInt(id))[0]
     return record.component
   }
-  
+
   this.render = () => {
     rootElement.html(`
-      <table class="table table-hover">
+      <table class="table">
         <thead>
           <td>Name</td>
           <td>Initiative</td>

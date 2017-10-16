@@ -4,6 +4,7 @@ const PropertyComponent = function(parent, agent, property) {
   this.render = () => {
     return `
     <td 
+      class="property"
       onBlur="App.find(${this.id}).change(this)"
       onFocus="$(this).text('')" 
       data-attr="${property}" 
