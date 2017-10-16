@@ -1,4 +1,4 @@
-const AgentComponent = function(agent) {
+const AgentComponent = function(parent, agent) {
   this.render = () => {
       return `
       <tr>
@@ -12,7 +12,11 @@ const AgentComponent = function(agent) {
   }
 
   this._child = (agent, property) => {
-    const component = new PropertyComponent(agent, property)
+    const component = new PropertyComponent(this, agent, property)
     return component.render()
+  }
+
+  this.change = (property, value) => {
+    parent.change(agent, property, value)
   }
 }

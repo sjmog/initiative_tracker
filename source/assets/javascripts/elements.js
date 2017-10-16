@@ -1,5 +1,5 @@
 const Elements = function() {
   return {
-    main: $('#main')
+    main: $('main')
   }
-}
+}()

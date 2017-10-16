@@ -6,17 +6,13 @@
 //= require bootstrap-sprockets
 //= require ./agent
 //= require ./tracker
-//= require ./components/components
+
+//= require ./components/app
 //= require ./components/tracker
 //= require ./components/agent
 //= require ./components/property
 
 //= require ./elements
-//= require ./render
 
-let tracker = new Tracker
-
-tracker.add("Kobold", 12, 7)
-tracker.add("Jef", 17, 21)
-
-Render(tracker)
+const App = new AppComponent(Elements.main, new Tracker)
+App.render()

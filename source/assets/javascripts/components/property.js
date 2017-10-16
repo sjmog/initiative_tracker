@@ -1,10 +1,11 @@
-const PropertyComponent = function(agent, property) {
-  this.id = components.register(this)
+const PropertyComponent = function(parent, agent, property) {
+  this.id = App.register(this)
 
   this.render = () => {
     return `
     <td 
-      onInput="components.find(${this.id}).change(this)" 
+      onBlur="App.find(${this.id}).change(this)"
+      onFocus="$(this).text('')" 
       data-attr="${property}" 
       data-id="${agent.id}" 
       contenteditable>${agent[property]}
@@ -13,6 +14,6 @@ const PropertyComponent = function(agent, property) {
   }
 
   this.change = (el) => {
-    agent[property] = $(el).text()
+    parent.change(property, $(el).text())
   }
 }
