@@ -8,7 +8,7 @@ const CreatureSelectorComponent = function(parent, agent) {
     // required for placeholders
     select.appendChild(document.createElement('option'))
 
-    CREATURES.forEach((creature) => {
+    Creatures.data.forEach((creature) => {
       let option = document.createElement('option')
       option.appendChild(document.createTextNode(creature.name))
       if(creature.name == agent.name)
@@ -29,10 +29,8 @@ const CreatureSelectorComponent = function(parent, agent) {
     return el
   }
 
-  this._change = (value) => {
-    if(!CREATURES.map((creature) => creature.name).includes(value))
-      CREATURES.push({ name: value })
-    parent.change('name', value)
+  this._change = (name) => {
+    parent.change(Creatures.findOrCreateBy(name))
   }
 
   return this.render()

@@ -12,7 +12,7 @@ const PropertyComponent = function(parent, agent, property) {
   }
 
   this._change = (value) => {
-    parent.change(property, value)
+    parent.changeProperty(property, value)
   }
 
   this._handleEnter = (event, el) => {

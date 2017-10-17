@@ -18,7 +18,14 @@ const AgentComponent = function(parent, agent, classes = []) {
     return classes
   }
 
-  this.change = (property, value) => {
+  this.change = (creature) => {
+    parent.change(agent, 'name', creature.name)
+    parent.change(agent, 'initiative', agent.initiative + Modifier(creature.dexterity || 10))
+    parent.change(agent, 'ac', creature.armor_class)
+    parent.change(agent, 'hp', Roll(creature.hit_dice))
+  }
+
+  this.changeProperty = (property, value) => {
     parent.change(agent, property, value)
   }
 

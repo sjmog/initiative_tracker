@@ -9,6 +9,8 @@
 
 //= require ./data/creatures
 
+//= require ./roll
+//= require ./modifier
 //= require ./agent
 //= require ./tracker
 
