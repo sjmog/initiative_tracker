@@ -1,5 +1,5 @@
 const AppComponent = function(rootElement, tracker) {
-  const HEADERS = ['Name', 'Initiative', 'AC', 'Health', 'Status']
+  const HEADERS = ['Creature', 'Initiative', 'AC', 'Health', 'Status']
 
   this.render = () => {
     let el = document.createElement('table')

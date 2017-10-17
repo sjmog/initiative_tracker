@@ -4,7 +4,7 @@ const PropertyComponent = function(parent, agent, property) {
     el.className = "property"
     el.onblur = () => { this._change(el.textContent) }
     el.onfocus = () => { el.textContent = '' }
-    el.oninput = (event, thing) => { this._handleEnter(event, el) }
+    el.oninput = (event) => { this._handleEnter(event, el) }
     el.contentEditable = true
     el.appendChild(document.createTextNode(agent[property]))
 

@@ -3,6 +3,8 @@ const AgentComponent = function(parent, agent, classes = []) {
     let el = document.createElement('tr')
     el.className = `agent ${this._classes()}`
 
+    el.appendChild(new CreatureSelectorComponent(this, agent))
+
     agent.PROPERTIES.forEach((property) => {
       el.appendChild(new PropertyComponent(this, agent, property))
     })
