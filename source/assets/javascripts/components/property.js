@@ -2,15 +2,23 @@ const PropertyComponent = function(parent, agent, property) {
   this.render = () => {
     let el = document.createElement("td")
     el.className = "property"
-    el.onblur = () => { this.change(el.textContent) }
+    el.onblur = () => { this._change(el.textContent) }
     el.onfocus = () => { el.textContent = '' }
+    el.oninput = (event, thing) => { this._handleEnter(event, el) }
     el.contentEditable = true
     el.appendChild(document.createTextNode(agent[property]))
 
     return el
   }
 
-  this.change = (value) => {
+  this._change = (value) => {
     parent.change(property, value)
   }
+
+  this._handleEnter = (event, el) => {
+    if (event.inputType == 'insertText' && event.data == null)
+      el.blur()
+  }
+
+  return this.render()
 }

@@ -1,24 +1,12 @@
 const TrackerComponent = function(parent, tracker) {
   this.render = () => {
     let el = document.createElement('tbody')
-    this._agents().forEach((agent) => {
-      el.appendChild(agent)
+    tracker.index().forEach((agent) => {
+      el.appendChild(new AgentComponent(this, agent))
     })
-    el.appendChild(this._newAgent())
-    
+    el.appendChild(new AgentComponent(this, new Agent, "agent--new"))
+
     return el
-  }
-
-  this._agents = () => {
-    return tracker.index().map((agent) => {
-      const component = new AgentComponent(this, agent)
-      return component.render()
-    })
-  }
-
-  this._newAgent = () => {
-    const component = new AgentComponent(this, new Agent, "agent--new")
-    return component.render()
   }
 
   this.change = (agent, property, value) => {
@@ -26,4 +14,6 @@ const TrackerComponent = function(parent, tracker) {
     tracker.upsert(agent)
     parent.render()
   }
+
+  return this.render()
 }

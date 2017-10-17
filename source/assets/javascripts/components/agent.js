@@ -4,15 +4,10 @@ const AgentComponent = function(parent, agent, classes = []) {
     el.className = `agent ${this._classes()}`
 
     agent.PROPERTIES.forEach((property) => {
-      el.appendChild(this._child(agent, property))
+      el.appendChild(new PropertyComponent(this, agent, property))
     })
 
     return el
-  }
-
-  this._child = (agent, property) => {
-    const component = new PropertyComponent(this, agent, property)
-    return component.render()
   }
 
   this._classes = () => {
@@ -24,4 +19,6 @@ const AgentComponent = function(parent, agent, classes = []) {
   this.change = (property, value) => {
     parent.change(agent, property, value)
   }
+
+  return this.render()
 }
