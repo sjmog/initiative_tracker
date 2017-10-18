@@ -9,10 +9,9 @@ const TrackerComponent = function(parent, tracker) {
     return el
   }
 
-  this.change = (agent, property, value) => {
-    agent[property] = value
+  this.change = (agent) => {
     tracker.upsert(agent)
-    
+
     parent.change()
   }
 
