@@ -12,7 +12,8 @@ const TrackerComponent = function(parent, tracker) {
   this.change = (agent, property, value) => {
     agent[property] = value
     tracker.upsert(agent)
-    parent.render()
+    
+    parent.change()
   }
 
   return this.render()

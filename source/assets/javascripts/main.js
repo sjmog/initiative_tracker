@@ -16,11 +16,14 @@
 //= require ./tracker
 
 //= require ./components/app
+//= require ./components/button_bar
+//= require ./components/initiative_table
 //= require ./components/headers
 //= require ./components/tracker
 //= require ./components/agent
 //= require ./components/property
 //= require ./components/creature_selector
+//= require ./components/creature_option
 //= require ./components/save
 //= require ./components/load
 

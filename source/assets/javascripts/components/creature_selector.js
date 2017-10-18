@@ -5,16 +5,10 @@ const CreatureSelectorComponent = function(parent, agent) {
 
     let select = document.createElement('select')
 
-    // required for placeholders
-    select.appendChild(document.createElement('option'))
+    this._enablePlaceholders(select)
 
     Creatures.data.forEach((creature) => {
-      let option = document.createElement('option')
-      option.appendChild(document.createTextNode(creature.name))
-      if(creature.name == agent.name)
-        option.selected = true
-
-      select.appendChild(option)
+      select.appendChild(new CreatureOptionComponent(this, creature, creature.name == agent.name))
     })
 
     select.onchange = () => { this._change(select.value) }
@@ -27,6 +21,10 @@ const CreatureSelectorComponent = function(parent, agent) {
     })
 
     return el
+  }
+
+  this._enablePlaceholders = (select) => {
+    select.appendChild(document.createElement('option'))
   }
 
   this._change = (name) => {
