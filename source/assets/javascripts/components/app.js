@@ -1,14 +1,10 @@
 const AppComponent = function(rootElement, tracker) {
-  const HEADERS = ['Creature', 'Initiative', 'AC', 'Health', 'Status']
-
   this.render = () => {
-    let el = document.createElement('table')
-
+    let el = document.createElement('div')
     el.id = 'app'
-    el.className = 'table'
 
-    el.appendChild(this._headers())
-    el.appendChild(new TrackerComponent(this, tracker))
+    el.appendChild(this._buttonBar())
+    el.appendChild(this._table())
 
     if(previous = document.getElementById('app'))
       rootElement.replaceChild(el, previous)
@@ -16,17 +12,32 @@ const AppComponent = function(rootElement, tracker) {
       rootElement.appendChild(el)
   }
 
-  this._headers = () => {
-    let headers = document.createElement('thead')
+  this.save = () => {
+    Persistence.save(tracker)
+  }
 
-    HEADERS.forEach((header) => {
-      let headerElement = document.createElement('td')
-      let text = document.createTextNode(header)
-      headerElement.appendChild(text)
-      headers.appendChild(headerElement)
-    })
+  this.load = () => {
+    App = Persistence.load()
+  }
 
-    return headers
+  this._buttonBar = () => {
+    let buttonBar = document.createElement('aside')
+    buttonBar.className = 'btn-toolbar'
+
+    buttonBar.appendChild(new SaveComponent(this))
+    buttonBar.appendChild(new LoadComponent(this))
+
+    return buttonBar
+  }
+
+  this._table = () => {
+    let table = document.createElement('table')
+    table.className = 'table'
+
+    table.appendChild(new HeadersComponent(this))
+    table.appendChild(new TrackerComponent(this, tracker))
+
+    return table
   }
 
   return this.render()

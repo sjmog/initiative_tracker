@@ -1,0 +1,13 @@
+.btn-toolbar {
+  justify-content: center;
+}
+.btn--save, .btn--load {
+  margin-bottom: 30px;
+  &:hover {
+    cursor: pointer
+  }
+}
+
+.btn--save {
+  margin-right: 15px;
+}
