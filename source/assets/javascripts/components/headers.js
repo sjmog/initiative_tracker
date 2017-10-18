@@ -1,10 +1,8 @@
-const HeadersComponent = function(parent) {
-  const HEADERS = ['Creature', 'Initiative', 'AC', 'Health', 'Status']
-
+const HeadersComponent = function(parent, headers) {
   this.render = () => {
     let el = document.createElement('thead')
 
-    HEADERS.forEach((header) => {
+    headers.forEach((header) => {
       let headerElement = document.createElement('td')
       headerElement.appendChild(document.createTextNode(header))
       el.appendChild(headerElement)

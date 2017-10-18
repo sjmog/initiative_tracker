@@ -8,6 +8,9 @@
 
 .agent--killed {
   color: $gray-lighter;
+  * {
+    color: $gray-lighter !important;
+  }
   font-style: italic;
   position: relative;
   &:after {
@@ -16,7 +19,7 @@
     height: 1px;
     background-color: $gray-lighter;
     position: absolute;
-    right: 20px;
+    right: 50%;
     left: 20px;
     margin-top: 25px;
   }

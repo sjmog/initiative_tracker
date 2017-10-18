@@ -1,15 +1,18 @@
 const AppComponent = function(rootElement, tracker) {
   this.render = () => {
-    let el = document.createElement('div')
-    el.id = 'app'
+    this.el = document.createElement('div')
+    this.el.id = 'app'
 
-    el.appendChild(new ButtonBar(this))
-    el.appendChild(new InitiativeTable(this, tracker))
+    this.infoBox = new InfoBox(this)
+
+    this.el.appendChild(new ButtonBar(this))
+    this.el.appendChild(new InitiativeTable(this, tracker))
+    this.el.appendChild(this.infoBox)
 
     if(previous = document.getElementById('app'))
-      rootElement.replaceChild(el, previous)
+      rootElement.replaceChild(this.el, previous)
     else
-      rootElement.appendChild(el)
+      rootElement.appendChild(this.el)
   }
 
   this.save = () => {
@@ -18,6 +21,11 @@ const AppComponent = function(rootElement, tracker) {
 
   this.load = () => {
     App = Persistence.load()
+  }
+
+  this.hover = (agent) => {
+    this.infoBox = new InfoBox(this, agent)
+    this.el.replaceChild(new InfoBox(this, agent), document.getElementById('info-box'))
   }
 
   return this.render()

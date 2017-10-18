@@ -15,5 +15,9 @@ const TrackerComponent = function(parent, tracker) {
     parent.change()
   }
 
+  this.hover = (agent) => {
+    parent.hover(agent)
+  }
+
   return this.render()
 }

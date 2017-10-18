@@ -1,0 +1,17 @@
+.info-box {
+  float: left;
+  width: 40%;
+  border: 1px solid $gray-light;
+  min-height: 400px;
+  padding: 40px 20px;
+  
+  p {
+    margin-bottom: 0;
+    font-size: $font-size-small;
+  }
+
+  .label--strong {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+}

@@ -4,14 +4,17 @@
 
 //= require popper
 //= require bootstrap-sprockets
-
 //= require ./vendor/select2.min
+//= require ./string
 
 //= require ./data/creatures
 
 //= require ./persistence
+//= require ./dice
 //= require ./roll
 //= require ./modifier
+//= require ./ability_scores
+
 //= require ./agent
 //= require ./tracker
 
@@ -26,6 +29,9 @@
 //= require ./components/creature_option
 //= require ./components/save
 //= require ./components/load
+//= require ./components/info_box
+//= require ./components/ability_scores_box
+//= require ./components/saving_throws_box
 
 //= require ./elements
 

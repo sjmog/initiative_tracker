@@ -9,6 +9,8 @@ const AgentComponent = function(parent, agent, classes = []) {
       el.appendChild(new PropertyComponent(this, agent, property))
     })
 
+    el.onmouseenter = () => { this._hover() }
+
     return el
   }
 
@@ -22,7 +24,7 @@ const AgentComponent = function(parent, agent, classes = []) {
     agent.name       = creature.name
     agent.initiative = parseInt(agent.initiative + Modifier(creature.dexterity || 10))
     agent.ac         = parseInt(creature.armor_class)
-    agent.hp         = parseInt(Roll(creature.hit_dice))
+    agent.hp         = parseInt(creature.hit_points)
 
     parent.change(agent)
   }
@@ -31,6 +33,10 @@ const AgentComponent = function(parent, agent, classes = []) {
     agent[property] = value
 
     parent.change(agent)
+  }
+
+  this._hover = () => {
+    parent.hover(agent)
   }
 
   return this.render()
