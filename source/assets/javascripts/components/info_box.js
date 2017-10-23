@@ -19,6 +19,10 @@ const InfoBox = function(parent, agent) {
 
         el.appendChild(new AbilityScoresBox(this, creature))
         el.appendChild(new SavingThrowsBox(this, creature))
+        el.appendChild(new SkillsBox(this, creature))
+        el.appendChild(new ParagraphComponent(creature.senses, 'Senses'))
+        el.appendChild(new ParagraphComponent(creature.languages, 'Languages'))
+        el.appendChild(new ParagraphComponent(`${creature.challenge_rating} (${ChallengeRatings[creature.challenge_rating]} XP)`, 'Challenge'))
       }
     }
 

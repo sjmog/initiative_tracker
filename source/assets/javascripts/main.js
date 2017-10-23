@@ -8,6 +8,7 @@
 //= require ./string
 
 //= require ./data/creatures
+//= require ./data/challenge_ratings
 
 //= require ./persistence
 //= require ./dice
@@ -33,6 +34,7 @@
 //= require ./components/image
 //= require ./components/ability_scores_box
 //= require ./components/saving_throws_box
+//= require ./components/skills_box
 //= require ./components/paragraph
 //= require ./components/header
 
