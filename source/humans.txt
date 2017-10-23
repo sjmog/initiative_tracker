@@ -1,5 +1,6 @@
 /* TEAM */
 
+    Sam Morgan (@sjmog1)
 
 /* THANKS */
 
@@ -12,10 +13,3 @@
     Compass
     jQuery
     GIT
-
-/* SITE */
-
-    Last Update: YYYY/MM/DD
-    Doctype: HTML5
-    IDE: RubyMine
-    Platform: Middleman - Ruby
