@@ -37,6 +37,7 @@
 //= require ./components/skills_box
 //= require ./components/paragraph
 //= require ./components/header
+//= require ./components/subheader
 
 //= require ./elements
 

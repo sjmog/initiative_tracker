@@ -23,6 +23,28 @@ const InfoBox = function(parent, agent) {
         el.appendChild(new ParagraphComponent(creature.senses, 'Senses'))
         el.appendChild(new ParagraphComponent(creature.languages, 'Languages'))
         el.appendChild(new ParagraphComponent(`${creature.challenge_rating} (${ChallengeRatings[creature.challenge_rating]} XP)`, 'Challenge'))
+
+        if(creature.special_abilities !== undefined) {
+          el.appendChild(document.createElement('hr'))
+          creature.special_abilities.forEach((ability) => {
+            el.appendChild(new ParagraphComponent(ability.desc, `${ability.name}.`))
+          })
+        }
+
+        if(creature.actions !== undefined) {
+          el.appendChild(new SubheaderComponent('Actions'))
+          creature.actions.forEach((action) => {
+            el.appendChild(new ParagraphComponent(action.desc, `${action.name}.`))
+          })
+        }
+        
+
+        if(creature.legendary_actions !== undefined) {
+          el.appendChild(new SubheaderComponent('Legendary Actions'))
+          creature.legendary_actions.forEach((action) => {
+            el.appendChild(new ParagraphComponent(action.desc, `${action.name}.`))
+          })
+        }
       }
     }
 
