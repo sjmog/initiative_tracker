@@ -24411,6 +24411,40 @@ const Creatures = function() {
   }
 }()
 ;
+const ChallengeRatings = function() {
+  return {
+    "0": "10",
+    "1/8": "25",
+    "1/4": "50",
+    "1/2": "100",
+    "1": "200",
+    "2": "450",
+    "3": "700",
+    "4": "1,100",
+    "5": "1,800",
+    "6": "2,300",
+    "7": "2,900",
+    "8": "3,900",
+    "9": "5,000",
+    "10": "5,900",
+    "11": "7,200",
+    "12": "8,400",
+    "13": "10,000",
+    "14": "11,500",
+    "15": "13,000",
+    "16": "15,000",
+    "17": "18,000",
+    "18": "20,000",
+    "19": "22,000",
+    "20": "25,000",
+    "21": "33,000",
+    "22": "41,000",
+    "23": "50,000",
+    "24": "62,000",
+    "30": "155,000"
+  }
+}()
+;
 const Persistence = function() {
   this.save = (tracker) => {
     localStorage.setItem('agents', JSON.stringify(tracker.index()))
@@ -24805,44 +24839,49 @@ const InfoBox = function(parent, agent) {
 
     if(agent) {
       const creature = Creatures.find(agent.name)
-      el.appendChild(this._header(`${agent.name}${agent.isKilled() ? ' (killed)' : ''}`))
+      el.appendChild(new HeaderComponent(`${agent.name}${agent.isKilled() ? ' (killed)' : ''}`))
 
       if(creature) {
         // uncomment to render an image for this creature
         // el.appendChild(new ImageComponent(this, creature))
 
-        el.appendChild(this._paragraph(`${creature.size} ${creature.type}${creature.subtype.length > 0 ? ` (${creature.subtype})` : ''}, ${creature.alignment}`))
-        el.appendChild(this._paragraph(creature.armor_class, 'Armor Class'))
-        el.appendChild(this._paragraph(`${agent.hp} (${creature.hit_dice}${ creature.constitution > 10 ? ` + ${ Dice.number(creature.hit_dice) * Modifier(creature.constitution)}` : '' })`, 'Hit Points'))
-        el.appendChild(this._paragraph(creature.speed, 'Speed'))
+        el.appendChild(new ParagraphComponent(`${creature.size} ${creature.type}${creature.subtype.length > 0 ? ` (${creature.subtype})` : ''}, ${creature.alignment}`))
+        el.appendChild(new ParagraphComponent(creature.armor_class, 'Armor Class'))
+        el.appendChild(new ParagraphComponent(`${agent.hp} (${creature.hit_dice}${ creature.constitution > 10 ? ` + ${ Dice.number(creature.hit_dice) * Modifier(creature.constitution)}` : '' })`, 'Hit Points'))
+        el.appendChild(new ParagraphComponent(creature.speed, 'Speed'))
 
         el.appendChild(new AbilityScoresBox(this, creature))
         el.appendChild(new SavingThrowsBox(this, creature))
+        el.appendChild(new SkillsBox(this, creature))
+        el.appendChild(new ParagraphComponent(creature.senses, 'Senses'))
+        el.appendChild(new ParagraphComponent(creature.languages, 'Languages'))
+        el.appendChild(new ParagraphComponent(`${creature.challenge_rating} (${ChallengeRatings[creature.challenge_rating]} XP)`, 'Challenge'))
+
+        if(creature.special_abilities !== undefined) {
+          el.appendChild(document.createElement('hr'))
+          creature.special_abilities.forEach((ability) => {
+            el.appendChild(new ParagraphComponent(ability.desc, `${ability.name}.`))
+          })
+        }
+
+        if(creature.actions !== undefined) {
+          el.appendChild(new SubheaderComponent('Actions'))
+          creature.actions.forEach((action) => {
+            el.appendChild(new ParagraphComponent(action.desc, `${action.name}.`))
+          })
+        }
+        
+
+        if(creature.legendary_actions !== undefined) {
+          el.appendChild(new SubheaderComponent('Legendary Actions'))
+          creature.legendary_actions.forEach((action) => {
+            el.appendChild(new ParagraphComponent(action.desc, `${action.name}.`))
+          })
+        }
       }
     }
 
     return el
-  }
-
-  this._header = (content) => {
-    let header = document.createElement('h2')
-    header.appendChild(document.createTextNode(content))
-    return header
-  }
-
-  this._paragraph = (content, label) => {
-    let paragraph = document.createElement('p')
-    if(label) 
-      paragraph.appendChild(this._bold(label))
-    paragraph.appendChild(document.createTextNode(content))
-    return paragraph
-  }
-
-  this._bold = (content) => {
-    let bold = document.createElement('span')
-    bold.className = 'label--strong'
-    bold.appendChild(document.createTextNode(content))
-    return bold
   }
 
   return this.render()
@@ -24899,24 +24938,96 @@ const SavingThrowsBox = function(parent, creature) {
     })
 
     if(throws.length > 0)
-      return this._paragraph(throws.join(", "), "Saving Throws")
+      return new ParagraphComponent(throws.join(", "), "Saving Throws")
     
     return document.createElement('spacer') 
   }
 
-  this._paragraph = (content, label) => {
-    let paragraph = document.createElement('p')
+  return this.render()
+}
+;
+const SkillsBox = function(parent, creature) {
+  const SKILLS = [
+    'athletics',
+    'acrobatics',
+    'sleight of hand',
+    'stealth',
+    'arcana',
+    'history',
+    'investigation',
+    'nature',
+    'religion',
+    'animal handling',
+    'insight',
+    'medicine',
+    'perception',
+    'survival',
+    'deception',
+    'intimidation',
+    'performance',
+    'persuasion'
+  ]
+
+  this.render = () => {
+    let el = document.createElement('div')
+
+    let creatureSkills = []
+
+    SKILLS.forEach((skill) => {
+      if(creature[skill] !== undefined)
+        creatureSkills.push(`${skill.capitalize()} +${creature[skill]}`)
+    })
+    
+    if(creatureSkills.length > 0) {
+      el.appendChild(new ParagraphComponent(creatureSkills.join(', '), "Skills"))
+    }
+
+    return el
+  }
+
+  return this.render()
+}
+;
+const ParagraphComponent = function(content, label) {
+  this.render = () => {
+    let el = document.createElement('p')
+
     if(label) 
-      paragraph.appendChild(this._bold(label))
-    paragraph.appendChild(document.createTextNode(content))
-    return paragraph
+      el.appendChild(this._bold(label))
+
+    el.appendChild(document.createTextNode(content))
+
+    return el
   }
 
   this._bold = (content) => {
     let bold = document.createElement('span')
     bold.className = 'label--strong'
     bold.appendChild(document.createTextNode(content))
+    
     return bold
+  }
+
+  return this.render()
+}
+;
+const HeaderComponent = function(content) {
+  this.render = () => {
+    let el = document.createElement('h2')
+    el.appendChild(document.createTextNode(content))
+    
+    return el
+  }
+
+  return this.render()
+}
+;
+const SubheaderComponent = function(content) {
+  this.render = () => {
+    let el = document.createElement('h3')
+    el.appendChild(document.createTextNode(content))
+    
+    return el
   }
 
   return this.render()
@@ -24931,6 +25042,11 @@ const Elements = function() {
 //------------------------------------
 //	#Bootstrap JS Components
 //------------------------------------
+
+
+
+
+
 
 
 
