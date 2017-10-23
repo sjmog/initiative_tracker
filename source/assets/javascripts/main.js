@@ -33,6 +33,8 @@
 //= require ./components/image
 //= require ./components/ability_scores_box
 //= require ./components/saving_throws_box
+//= require ./components/paragraph
+//= require ./components/header
 
 //= require ./elements
 

@@ -9,24 +9,9 @@ const SavingThrowsBox = function(parent, creature) {
     })
 
     if(throws.length > 0)
-      return this._paragraph(throws.join(", "), "Saving Throws")
+      return new ParagraphComponent(throws.join(", "), "Saving Throws")
     
     return document.createElement('spacer') 
-  }
-
-  this._paragraph = (content, label) => {
-    let paragraph = document.createElement('p')
-    if(label) 
-      paragraph.appendChild(this._bold(label))
-    paragraph.appendChild(document.createTextNode(content))
-    return paragraph
-  }
-
-  this._bold = (content) => {
-    let bold = document.createElement('span')
-    bold.className = 'label--strong'
-    bold.appendChild(document.createTextNode(content))
-    return bold
   }
 
   return this.render()
