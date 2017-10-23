@@ -9,6 +9,9 @@ const InfoBox = function(parent, agent) {
       el.appendChild(this._header(`${agent.name}${agent.isKilled() ? ' (killed)' : ''}`))
 
       if(creature) {
+        // uncomment to render an image for this creature
+        // el.appendChild(new ImageComponent(this, creature))
+
         el.appendChild(this._paragraph(`${creature.size} ${creature.type}${creature.subtype.length > 0 ? ` (${creature.subtype})` : ''}, ${creature.alignment}`))
         el.appendChild(this._paragraph(creature.armor_class, 'Armor Class'))
         el.appendChild(this._paragraph(`${agent.hp} (${creature.hit_dice}${ creature.constitution > 10 ? ` + ${ Dice.number(creature.hit_dice) * Modifier(creature.constitution)}` : '' })`, 'Hit Points'))

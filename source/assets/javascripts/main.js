@@ -30,6 +30,7 @@
 //= require ./components/save
 //= require ./components/load
 //= require ./components/info_box
+//= require ./components/image
 //= require ./components/ability_scores_box
 //= require ./components/saving_throws_box
 
