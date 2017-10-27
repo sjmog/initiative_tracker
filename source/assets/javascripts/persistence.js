@@ -1,16 +1,21 @@
 const Persistence = function() {
-  this.save = (tracker) => {
-    localStorage.setItem('agents', JSON.stringify(tracker.index()))
+  this.save = (key, data) => {
+    localStorage.setItem(key, JSON.stringify(data))
   }
 
-  this.load = () => {
+  this.loadTracker = () => {
     const tracker = new Tracker
     tracker.load(JSON.parse(localStorage.getItem('agents')))
-    return new AppComponent(Elements.main, tracker)
+    return tracker
+  }
+
+  this.loadCreatures = () => {
+    return JSON.parse(localStorage.getItem('creatures'))
   }
 
   return {
     save: this.save,
-    load: this.load
+    loadTracker: this.loadTracker,
+    loadCreatures: this.loadCreatures
   }
 }()

@@ -16,11 +16,11 @@ const AppComponent = function(rootElement, tracker) {
   }
 
   this.save = () => {
-    Persistence.save(tracker)
+    Persistence.save('agents', tracker.index())
   }
 
   this.load = () => {
-    App = Persistence.load()
+    App = new AppComponent(Elements.main, Persistence.loadTracker())
   }
 
   this.hover = (agent) => {

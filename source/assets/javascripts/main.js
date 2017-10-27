@@ -7,15 +7,17 @@
 //= require ./vendor/select2.min
 //= require ./string
 
+//= require ./persistence
+
 //= require ./data/creatures
 //= require ./data/challenge_ratings
 
-//= require ./persistence
 //= require ./dice
 //= require ./roll
 //= require ./modifier
 //= require ./ability_scores
 
+//= require ./creatures
 //= require ./agent
 //= require ./tracker
 
