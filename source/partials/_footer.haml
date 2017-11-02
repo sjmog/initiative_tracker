@@ -2,5 +2,7 @@
 :javascript
   //jQuery CDN fallback
   window.jQuery || document.write('<script src="assets/javascripts/vendor/jquery.min.js"><\/script>')
+=javascript_include_tag 'https://www.gstatic.com/firebasejs/4.6.0/firebase.js'
 =javascript_include_tag 'main.js',
-                        'application.js'
+                        'application.js',
+                        'firebase.js'
